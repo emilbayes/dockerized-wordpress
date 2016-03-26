@@ -1,0 +1,28 @@
+version: '2'
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - '8080:8080'
+    links:
+      - hhvm
+    volumes_from:
+      - hhvm:ro
+    restart: always
+    hostname: 192.168.99.100:8080 # Note that this is for development purposes only
+
+  hhvm:
+    build: ./hhvm
+    links:
+      - mariadb
+    volumes:
+      - './hhvm/opt/wordpress/content/themes:/opt/wordpress/content/themes:ro'
+    env_file: .env
+    restart: always
+
+  mariadb:
+    image: mariadb:latest
+    volumes:
+      - ./mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    env_file: .env
+    restart: always

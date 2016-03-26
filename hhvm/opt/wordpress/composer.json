@@ -1,0 +1,35 @@
+{
+  "name": "emilbayes/dockerized-wordpress",
+  "type": "project",
+  "repositories": [
+    {
+      "type":"composer",
+      "url":"https://wpackagist.org"
+    },
+    {
+      "type": "composer",
+      "url": "https://languages.koodimonni.fi"
+    }
+  ],
+  "require": {
+    "johnpbloch/wordpress": "4.4.2"
+  },
+  "extra": {
+    "installer-paths": {
+      "content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "content/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "dropin-paths": {
+      "content/languages/": ["vendor:koodimonni-language"],
+      "content/languages/plugins/": ["vendor:koodimonni-plugin-language"],
+      "content/languages/themes/": ["vendor:koodimonni-theme-language"]
+    }
+  },
+  "authors": [
+    {
+      "name": "Emil Bay",
+      "email": "github@tixz.dk",
+      "homepage": "http://bayes.dk"
+    }
+  ]
+}
